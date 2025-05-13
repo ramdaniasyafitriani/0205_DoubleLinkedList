@@ -147,3 +147,121 @@ void deleteNode()
    delete current;
    cout << "\x1b[32mRecord with roll number " << rollNo << " deleted\x1b[0m " << endl;
 }
+
+// method untuk mengecek apakah list kosong
+bool listEmpty()
+{
+    return (START == NULL);
+}
+
+// prosedur traverse untuk menampilkan data secara urut 
+void traverse()
+{
+    if (listEmpty())
+        cout << "\nList is Empty " << endl;
+  
+    else
+    {
+        cout << "\nData didalam list adalah :\n";
+        Node *currentNode = START;
+        while (currentNode != NULL)
+        {
+            cout << currentNode->noMhs << endl;
+            currentNode = currentNode->next;
+        }
+        cout << endl;
+    }
+}
+
+// prosedur untuk menampilkan data secara urutan terbalik
+void revtraverse()
+{
+    if (listEmpty())
+        cout << "\nList is Empty " << endl;
+    else
+    {
+        cout << "\nRecords in descending order of roll number are : " << endl;
+        Node *currentNode = START;
+        while (currentNode->next != NULL)
+            currentNode = currentNode->next;
+        
+        while (currentNode != NULL)
+        {
+            cout << currentNode->noMhs << " " << currentNode->name << endl;
+            currentNode = currentNode->prev;
+        }
+    }
+}
+
+// prosedur untuk mencari data dan menampilkan data yang dicari jika ada
+void searchData()
+{
+    if (listEmpty())
+    {
+        cout << "\nList is Empty " << endl;
+    }
+    Node *prev, *curr;
+    prev = curr = NULL;
+    cout << "\nEnter the roll number of the student whose record you want to search : ";
+    int num;
+    cin >> num;
+    if (search(num, &prev, &curr) == false)
+        cout << "\nRecord not found " << endl;
+    else
+    {
+        cout << "\nRecord found " << endl;
+        cout << "\nRoll number : " << curr->noMhs << endl;
+        cout << "\nName : " << curr->name << endl;
+    }
+}
+
+int main()
+{
+    // perulangan selama bernilai benar untuk program utama double linkedlist
+    while (true)
+    {
+        try
+        {
+            cout << "\nMenu" << endl;
+            cout << "1. Menambah data kedalam list " << endl;
+            cout << "2. Menghapus data dari dalam list " << endl;
+            cout << "3. view all records in the ascending order of roll numbers " << endl;
+            cout << "4. view all records in the descending order of roll numbers " << endl;
+            cout << "5. Search for a record in the list " << endl;
+            cout << "6. Keluar" << endl;
+            cout << "Masukkan pilihan (1-6): ";
+            char ch;
+            cin >> ch;
+
+            switch (ch)
+            {
+            case '1':
+                addNode();
+                break;
+            case '2' : 
+                deleteNode();
+                break;
+            case '3':
+                traverse();
+                break;
+            case '4':
+                revtraverse();
+                break;
+            case '5' : 
+                searchData();
+                break;
+            case '6' :
+                return 0;
+            default :
+                cout << "\nInvalid option " << endl;
+                break;
+                
+            }
+        }
+        catch (exception &e)
+        {
+            cout << " Check for the values entered." << endl;
+        }
+        
+    }
+}
