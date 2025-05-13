@@ -30,6 +30,13 @@ void addNode()
     // kondisi jika start == null atau noMhs node baru <= noMhs Start
     if (START == NULL || newNode->noMhs <= START->noMhs)
     {
-
+        // step 2: insert the new node at the beginning 
+        // kondisi jika start tidak kosong dan noMhs node baru sama dengan noMhs
+        if (START != NULL && newNode->noMhs == START->noMhs)
+        {
+            cout << "\033[31mDuplicate roll numbers not allowed\033[0m" << endl;
+            return; 
+        }
+ 
     }
 }
